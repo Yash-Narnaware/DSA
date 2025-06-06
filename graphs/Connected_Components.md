@@ -1,7 +1,7 @@
 # [Connected Components]
 
 *Platform*: [TUF] | **Problem Number**: [Number] | **Difficulty**: [Easy]  
-*Category*: [Topic] | **Pattern**: [Pattern]  
+*Category*: BFS/DFS traversal | **Pattern**: [Pattern]  
 *Priority*: [Low]
 
 ## Problem Statement
@@ -16,7 +16,7 @@ A connected component is a subgraph of a graph in which there exists a path betw
 - The number of times we initiate this call to traversal function is the number of componenets present in the graph.
 
 ## Solution Code
-```[python]
+```python
 class Solution:
     def findNumberOfComponent(self, E, V, edges):
 
