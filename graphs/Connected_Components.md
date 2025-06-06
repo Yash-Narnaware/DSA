@@ -1,8 +1,8 @@
-# [Connected Components]
+# Connected Components
 
-*Platform*: [TUF] | **Problem Number**: [Number] | **Difficulty**: [Easy]  
-*Category*: BFS/DFS traversal | **Pattern**: [Pattern]  
-*Priority*: [Low]
+*Platform*: TUF | **Problem Number**: [Number] | **Difficulty**: Easy  
+*Category*: BFS/DFS traversal | **Pattern**: graph traversal  
+*Priority*: Low
 
 ## Problem Statement
 [Original Problem Link](https://takeuforward.org/plus/dsa/problems/connected-components)  
@@ -44,7 +44,3 @@ class Solution:
 
         return res
 ```
-
-## Edge Cases
-
-## Notes
