@@ -17,6 +17,7 @@ Return the total number of provinces.
 ## Approaches
 
 - Same as calculating the number of components of the graph.
+- First convert adjacency matrix into adjacency list
 
 ## Solution Code
 ```python
