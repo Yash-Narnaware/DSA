@@ -155,7 +155,7 @@ class Solution:
 ## 5. Space Optimized DP Solution of LCS
 
 ### Problem Link
-[GeeksforGeeks: Space Optimized LCS](https://www.geeksforgeeks.org/space-optimized-solution-lcs/)
+[GeeksforGeeks: Space Optimized LCS](https://www.geeksforgeeks.org/problems/longest-common-subsequence-1587115620/1)
 
 ### Description
 Given two strings `s1` and `s2`, find the length of their longest common subsequence using a space-optimized dynamic programming approach. Instead of using an `m x n` DP table, use two arrays of size `n` to reduce space complexity from O(m*n) to O(n).
@@ -167,22 +167,26 @@ Given two strings `s1` and `s2`, find the length of their longest common subsequ
 
 ### Code
 ```python
-def lcsSpaceOptimized(s1, s2):
-    m, n = len(s1), len(s2)
-    if m < n:
-        s1, s2 = s2, s1
-        m, n = n, m
-    
-    curr = [0] * (n + 1)
-    prev = [0] * (n + 1)
-    
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            if s1[i-1] == s2[j-1]:
-                curr[j] = prev[j-1] + 1
-            else:
-                curr[j] = max(prev[j], curr[j-1])
-        prev = curr[:]
-    
-    return curr[n]
+class Solution:
+    def lcs(self, s1, s2):
+        # code here
+        
+        m = len(s1)
+        n = len(s2)
+        
+        prev = [0]*(n+1)
+        cur = [0]*(n+1)
+        
+        for i in range(1,m+1):
+            for j in range(1,n+1):
+                
+                if s1[i-1] == s2[j-1]:
+                    cur[j] = 1 + prev[j-1]
+                else:
+                    cur[j] = max(cur[j-1], prev[j])
+                    
+            prev = cur[:]
+                    
+        return cur[n]
+        
 ```
