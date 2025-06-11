@@ -118,7 +118,7 @@ class Solution:
 ## 4. Longest Repeating Subsequence
 
 ### Problem Link
-[GeeksforGeeks: Longest Repeating Subsequence](https://www.geeksforgeeks.org/longest-repeating-subsequence/)
+[GeeksforGeeks: Longest Repeating Subsequence](https://www.geeksforgeeks.org/problems/longest-repeating-subsequence2004/1)
 
 ### Description
 Given a string `s`, find the length of the longest subsequence that appears at least twice in `s` with no overlapping characters. This is solved by finding the LCS of `s` with itself, ensuring that the same index is not used for matching characters.
@@ -129,18 +129,27 @@ Given a string `s`, find the length of the longest subsequence that appears at l
 
 ### Code
 ```python
-def longestRepeatingSubsequence(s):
-    n = len(s)
-    dp = [[0] * (n + 1) for _ in range(n + 1)]
-    
-    for i in range(1, n + 1):
-        for j in range(1, n + 1):
-            if s[i-1] == s[j-1] and i != j:
-                dp[i][j] = dp[i-1][j-1] + 1
-            else:
-                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-                
-    return dp[n][n]
+class Solution:
+	def LongestRepeatingSubsequence(self, s):
+		# Code here
+		
+		m = len(s)
+        n = m
+        text1 = s
+        text2 = s
+        dp = [[0]*(n+1) for _ in range(m+1)]
+
+
+        for i in range(1,m+1):
+            for j in range(1,n+1):
+
+                if text1[i-1] == text2[j-1] and i != j:
+                    dp[i][j] = 1 + dp[i-1][j-1]
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+        
+        return dp[m][n]
 ```
 
 ## 5. Space Optimized DP Solution of LCS
