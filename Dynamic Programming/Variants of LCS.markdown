@@ -15,21 +15,23 @@ Given two strings `s1` and `s2`, find the minimum number of insertions and delet
 
 ### Code
 ```python
-def minOperations(s1, s2):
-    m, n = len(s1), len(s2)
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            if s1[i-1] == s2[j-1]:
-                dp[i][j] = dp[i-1][j-1] + 1
-            else:
-                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-                
-    lcs_length = dp[m][n]
-    deletions = m - lcs_length
-    insertions = n - lcs_length
-    return deletions + insertions
+#This leetcode problem is minute variate of what we discussed above - in this we have to make both strings same and we only have deletion operation and we have to return the minimum number of deletions required to mke both strings equal. 
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+
+        m = len(word1)
+        n = len(word2)
+
+        dp = [[0]*(n+1) for _ in range(m+1)]
+
+        for i in range(1,m+1):
+            for j in range(1,n+1):
+                if word1[i-1] == word2[j-1]:
+                    dp[i][j] = 1 + dp[i-1][j-1]
+                else:
+                    dp[i][j] = max(dp[i-1][j],dp[i][j-1])
+
+        return m + n - 2*dp[m][n]
 ```
 
 ## 2. Shortest Common Supersequence
