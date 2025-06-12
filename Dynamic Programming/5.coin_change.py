@@ -1,4 +1,4 @@
-#Leeycode - coin change 2 - https://leetcode.com/problems/coin-change-ii/
+#Leetcode - coin change 2 - https://leetcode.com/problems/coin-change-ii/
 
 #core logic is include - exclude coins, similar to knapsack problem
 
