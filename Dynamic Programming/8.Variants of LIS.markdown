@@ -1,10 +1,8 @@
 # Variants of Longest Increasing Subsequence (LIS)
 
-This document covers variants of the Longest Increasing Subsequence problem, including problem descriptions, step-by-step solutions, and Python implementations.
-
 ## 1. Maximum Deletions to Make Array Sorted
 
-**Problem Link**: [GeeksforGeeks - Minimum number of deletions to make a sorted sequence](https://www.geeksforgeeks.org/minimum-number-deletions-make-sorted-sequence/)
+**Problem Link**: [GeeksforGeeks - Minimum number of deletions to make a sorted sequence](https://www.geeksforgeeks.org/problems/minimum-number-of-deletions-to-make-a-sorted-sequence3248/1)
 
 **Description**: Given an array of integers, find the minimum number of elements to delete to make the array sorted in non-decreasing order. This is equivalent to finding the length of the LIS and subtracting it from the array length.
 
@@ -15,16 +13,21 @@ This document covers variants of the Longest Increasing Subsequence problem, inc
 
 **Python Code**:
 ```python
-def min_deletions(arr, n):
-    dp = [1] * n
-    for i in range(1, n):
-        for j in range(i):
-            if arr[i] >= arr[j]:
-                dp[i] = max(dp[i], dp[j] + 1)
-    return n - max(dp)
-arr = [5, 6, 2, 3, 4]
-n = len(arr)
-print("Minimum deletions:", min_deletions(arr, n))
+#User function Template for python3
+class Solution:
+	def minDeletions(self, arr, n):
+		# code here
+		
+		n = len(arr)
+		dp = [1]*n
+		
+		for i in range(1,n):
+		    for j in range(i):
+		        if arr[i] > arr[j]:
+		            dp[i] = max(dp[i], 1 + dp[j])
+		            
+		 
+		return n - max(dp)
 ```
 
 ## 2. Maximum Sum Increasing Subsequence
