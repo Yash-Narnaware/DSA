@@ -61,34 +61,41 @@ class Solution:
 
 ## 3. Maximum Length Bitonic Sequence
 
-**Problem Link**: [GeeksforGeeks - Longest Bitonic Subsequence](https://www.geeksforgeeks.org/longest-bitonic-subsequence/)
+**Problem Link**: [GeeksforGeeks - Longest Bitonic Subsequence](https://www.geeksforgeeks.org/problems/longest-bitonic-subsequence0824/1)
 
 **Description**: A bitonic sequence increases then decreases, or is entirely increasing or decreasing. Find the length of the longest bitonic subsequence.
+Note : A strictly increasing or a strictly decreasing sequence should not be considered as a bitonic sequence.
 
 **Step-by-Step Solution**:
-1. Compute the LIS ending at each index (lis[]).
-2. Compute the longest decreasing subsequence (LDS) starting at each index (lds[]) by reversing the logic of LIS.
-3. The length of the longest bitonic subsequence is the maximum of lis[i] + lds[i] - 1 for all i.
+1. Compute the LIS ending at each index (dp_i[]).
+2. Compute the longest decreasing subsequence (LDS) starting at each index (dp_d[]) by reversing the logic of LIS.
+3. The length of the longest bitonic subsequence is the maximum of dp_i[i] + dp_d[i] - 1 for all i.
 
 **Python Code**:
 ```python
-def longest_bitonic(arr, n):
-    lis = [1] * n
-    lds = [1] * n
-    # Compute LIS
-    for i in range(1, n):
-        for j in range(i):
-            if arr[i] > arr[j]:
-                lis[i] = max(lis[i], lis[j] + 1)
-    # Compute LDS
-    for i in range(n-2, -1, -1):
-        for j in range(n-1, i, -1):
-            if arr[i] > arr[j]:
-                lds[i] = max(lds[i], lds[j] + 1)
-    return max(lis[i] + lds[i] - 1 for i in range(n))
-arr = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9]
-n = len(arr)
-print("Longest bitonic length:", longest_bitonic(arr, n))
+class Solution:
+    def LongestBitonicSequence(self, n : int, nums : List[int]) -> int:
+        # code here
+		dp_i = [1]*n
+		dp_d = [1]*n
+		
+		for i in range(1,n):
+			for j in range(i):
+				if nums[i] > nums[j]:
+					dp_i[i] = max(dp_i[i], 1 + dp_i[j])
+		            
+		            
+		for i in range(n-2,-1,-1):
+			for j in range(i,n):
+				if nums[i] > nums[j]:
+					dp_d[i] = max(dp_d[i], 1 + dp_d[j])
+		            	            
+		res = 0 
+		for i in range(n):
+			if dp_i[i] != 1 and dp_d[i] != 1:
+				res = max(res,dp_i[i] + dp_d[i] - 1)
+		 
+		return res
 ```
 
 ## 4. Building Bridges
