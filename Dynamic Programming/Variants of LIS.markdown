@@ -1,0 +1,137 @@
+# Variants of Longest Increasing Subsequence (LIS)
+
+This document covers variants of the Longest Increasing Subsequence problem, including problem descriptions, step-by-step solutions, and Python implementations.
+
+## 1. Maximum Deletions to Make Array Sorted
+
+**Problem Link**: [GeeksforGeeks - Minimum number of deletions to make a sorted sequence](https://www.geeksforgeeks.org/minimum-number-deletions-make-sorted-sequence/)
+
+**Description**: Given an array of integers, find the minimum number of elements to delete to make the array sorted in non-decreasing order. This is equivalent to finding the length of the LIS and subtracting it from the array length.
+
+**Step-by-Step Solution**:
+1. Compute the length of the LIS using dynamic programming.
+2. For each element, maintain the length of the longest increasing subsequence ending at that element.
+3. The minimum deletions required is the total length of the array minus the length of the LIS.
+
+**Python Code**:
+```python
+def min_deletions(arr, n):
+    dp = [1] * n
+    for i in range(1, n):
+        for j in range(i):
+            if arr[i] >= arr[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    return n - max(dp)
+arr = [5, 6, 2, 3, 4]
+n = len(arr)
+print("Minimum deletions:", min_deletions(arr, n))
+```
+
+## 2. Maximum Sum Increasing Subsequence
+
+**Problem Link**: [GeeksforGeeks - Maximum Sum Increasing Subsequence](https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence/)
+
+**Description**: Find the maximum sum of an increasing subsequence in an array of positive integers.
+
+**Step-by-Step Solution**:
+1. Initialize a dp array where dp[i] stores the maximum sum of an increasing subsequence ending at index i.
+2. For each element, check all previous elements with a smaller value and update dp[i] if a larger sum is found.
+3. Return the maximum value in the dp array.
+
+**Python Code**:
+```python
+def max_sum_lis(arr, n):
+    dp = arr.copy()
+    for i in range(1, n):
+        for j in range(i):
+            if arr[i] > arr[j]:
+                dp[i] = max(dp[i], dp[j] + arr[i])
+    return max(dp)
+arr = [1, 101, 2, 3, 100]
+n = len(arr)
+print("Maximum sum:", max_sum_lis(arr, n))
+```
+
+## 3. Maximum Length Bitonic Sequence
+
+**Problem Link**: [GeeksforGeeks - Longest Bitonic Subsequence](https://www.geeksforgeeks.org/longest-bitonic-subsequence/)
+
+**Description**: A bitonic sequence increases then decreases, or is entirely increasing or decreasing. Find the length of the longest bitonic subsequence.
+
+**Step-by-Step Solution**:
+1. Compute the LIS ending at each index (lis[]).
+2. Compute the longest decreasing subsequence (LDS) starting at each index (lds[]) by reversing the logic of LIS.
+3. The length of the longest bitonic subsequence is the maximum of lis[i] + lds[i] - 1 for all i.
+
+**Python Code**:
+```python
+def longest_bitonic(arr, n):
+    lis = [1] * n
+    lds = [1] * n
+    # Compute LIS
+    for i in range(1, n):
+        for j in range(i):
+            if arr[i] > arr[j]:
+                lis[i] = max(lis[i], lis[j] + 1)
+    # Compute LDS
+    for i in range(n-2, -1, -1):
+        for j in range(n-1, i, -1):
+            if arr[i] > arr[j]:
+                lds[i] = max(lds[i], lds[j] + 1)
+    return max(lis[i] + lds[i] - 1 for i in range(n))
+arr = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9]
+n = len(arr)
+print("Longest bitonic length:", longest_bitonic(arr, n))
+```
+
+## 4. Building Bridges
+
+**Problem Link**: [GeeksforGeeks - Building Bridges](https://www.geeksforgeeks.org/dynamic-programming-building-bridges/)
+
+**Description**: Given pairs of points representing cities on two parallel riverbanks, find the maximum number of non-overlapping bridges that can be built. Each bridge connects a pair of cities, and no two bridges can cross.
+
+**Step-by-Step Solution**:
+1. Sort the pairs by the north bank coordinate.
+2. Find the LIS based on the south bank coordinates, ensuring non-overlapping bridges.
+3. The length of the LIS is the maximum number of bridges.
+
+**Python Code**:
+```python
+def max_bridges(cities, n):
+    cities.sort()  # Sort by north bank
+    dp = [1] * n
+    for i in range(1, n):
+        for j in range(i):
+            if cities[i][1] > cities[j][1]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    return max(dp)
+cities = [(5, 2), (3, 1), (1, 4), (4, 3), (2, 5)]
+n = len(cities)
+print("Maximum bridges:", max_bridges(cities, n))
+```
+
+## 5. The Longest Chain
+
+**Problem Link**: [LeetCode - Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/)
+
+**Description**: Given an array of pairs where each pair [a, b] represents an interval, find the longest chain of pairs such that for any two consecutive pairs [a, b] and [c, d], b < c.
+
+**Step-by-Step Solution**:
+1. Sort the pairs by the second element (end of interval).
+2. Iterate through the sorted pairs, counting valid pairs where the start of the current pair is greater than the end of the previous selected pair.
+3. Alternatively, use LIS based on the second element with the condition b < c.
+
+**Python Code**:
+```python
+def longest_chain(pairs):
+    pairs.sort(key=lambda x: x[1])
+    curr_end = float('-inf')
+    count = 0
+    for start, end in pairs:
+        if start > curr_end:
+            count += 1
+            curr_end = end
+    return count
+pairs = [[1, 2], [2, 3], [3, 4]]
+print("Longest chain length:", longest_chain(pairs))
+```
