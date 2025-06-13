@@ -32,27 +32,31 @@ class Solution:
 
 ## 2. Maximum Sum Increasing Subsequence
 
-**Problem Link**: [GeeksforGeeks - Maximum Sum Increasing Subsequence](https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence/)
+**Problem Link**: [GeeksforGeeks - Maximum Sum Increasing Subsequence](https://www.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence4749/1)
 
 **Description**: Find the maximum sum of an increasing subsequence in an array of positive integers.
 
 **Step-by-Step Solution**:
-1. Initialize a dp array where dp[i] stores the maximum sum of an increasing subsequence ending at index i.
+1. Initialize a dp array where dp[i] stores the maximum sum of an increasing subsequence ending at index i. Initially dp[i] will be element at index i.
 2. For each element, check all previous elements with a smaller value and update dp[i] if a larger sum is found.
 3. Return the maximum value in the dp array.
 
 **Python Code**:
 ```python
-def max_sum_lis(arr, n):
-    dp = arr.copy()
-    for i in range(1, n):
-        for j in range(i):
-            if arr[i] > arr[j]:
-                dp[i] = max(dp[i], dp[j] + arr[i])
-    return max(dp)
-arr = [1, 101, 2, 3, 100]
-n = len(arr)
-print("Maximum sum:", max_sum_lis(arr, n))
+#User function Template for python3
+class Solution:
+	def maxSumIS(self, arr):
+		# code here
+		
+		n = len(arr)
+		dp = [i for i in arr]
+		
+		for i in range(1,n):
+		    for j in range(i):
+		        if arr[i] > arr[j]:
+		            dp[i] = max(dp[i],dp[j] + arr[i])
+		            
+		return max(dp)
 ```
 
 ## 3. Maximum Length Bitonic Sequence
