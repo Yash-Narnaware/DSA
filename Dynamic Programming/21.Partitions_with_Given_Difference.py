@@ -5,6 +5,7 @@
 
 #Same as #20 just little change in base condition and return statement
 
+#Also can be done by solving equations - sum1 - sum2 = d and sum1 + sum2 = sum(arr). Derive value for sum1 from it and now it is count of subset sum problem. Have to count the number of subsets whose sum is this target sum.
 
 
 #Recursive approach
