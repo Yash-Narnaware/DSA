@@ -262,3 +262,36 @@ class Solution:
         
         return len(s) - dp[n][n]
 ```
+
+## 8. Minimum number of insertitions to make string palindromic
+
+### Problem Link
+[GeeksforGeeks: Form a palindrome](https://www.geeksforgeeks.org/problems/form-a-palindrome2544/1)
+
+### Description
+Given a string `s` return the minimum number of  insertitions to make the string palindromic
+
+### Solution
+We need `minimum` number of insertitions so we have to find the lenght of maximum palindromic subsequence possible for the given string that we will substract LPS lenght from lenght of string and that will be our minimum number of insertitions required. Basically we are adding character for those chars which we didnt select in LPS and now we are adding one more instance of that char so it will be included in LPS(adding a mate for neglected chars so that they will be included in palindromic string).
+
+### Code 
+```python
+class Solution:
+    def findMinInsertions(self, s):
+
+        s2 = s[::-1]
+        n = len(s)
+
+        dp = [[0]*(n+1) for _ in range(n+1)]
+        
+        for i in range(1,n+1):
+            for j in range(1,n+1):
+                if s[i-1] == s2[j-1]:
+                    dp[i][j] = 1 + dp[i-1][j-1]
+                else:
+                    dp[i][j] = max(dp[i-1][j],dp[i][j-1])
+                    
+        
+        return n - dp[n][n]
+```
+
