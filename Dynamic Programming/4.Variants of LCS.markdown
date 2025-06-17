@@ -194,7 +194,7 @@ class Solution:
 ## 6. Longest Common Substring
 
 ### Problem Link
-[GeeksforGeeks: Space Optimized LCS](https://www.geeksforgeeks.org/problems/longest-common-substring1452/1)
+[GeeksforGeeks: Longest Common Substring](https://www.geeksforgeeks.org/problems/longest-common-substring1452/1)
 
 ### Description
 Given two strings `s1` and `s2`, find the length of their longest common substring(continuous).
@@ -228,4 +228,37 @@ class Solution:
         return res
 
 
+```
+
+## 7. Minimum number of deletions to make string palindromic
+
+### Problem Link
+[GeeksforGeeks: Minimum number of deletions](https://www.geeksforgeeks.org/problems/minimum-number-of-deletions4610/1)
+
+### Description
+Given a string `s` return the minimum number of deletions to make the string palindromic
+
+### Solution
+We need `minimum` number of deletions so we have to find the lenght of maximum palindromic subsequence possible for the given string that we will substract LPS lenght from lenght of string and that will be our minimum number of deletions required.
+
+### Code 
+```python
+class Solution:
+    def minDeletions(self, s):
+ 
+        s2 = s[::-1]
+        n = len(s)
+
+        
+        dp = [[0]*(n+1) for _ in range(n+1)]
+        
+        for i in range(1,n+1):
+            for j in range(1,n+1):
+                if s[i-1] == s2[j-1]:
+                    dp[i][j] = 1 + dp[i-1][j-1]
+                else:
+                    dp[i][j] = max(dp[i-1][j],dp[i][j-1])
+                    
+        
+        return len(s) - dp[n][n]
 ```
