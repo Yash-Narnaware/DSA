@@ -3,20 +3,6 @@
 #At each index consider all the possibilities like buy,sell, do nothing and move to nex index. if we already have bought the stock then selling it at current index or moving to next index etc.
 
 
-#Recursive Approach
-class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        n = len(prices)
-        def func(cur,bought):
-
-            if cur == n:
-                return 0
-            if bought != -1:
-                return max(prices[cur] - prices[bought], func(cur+1,bought))
-            else:
-                return max(func(cur+1,cur), func(cur+1,bought))
-
-        return func(0,-1)
 
 
 #Memoization - top down
@@ -25,20 +11,32 @@ class Solution:
 
         n = len(prices)
         mem = {}
-        def func(cur,bought):
-            if (cur, bought) not in mem:
-                if cur == n:
-                    mem[(cur, bought)] = 0
+        def func(cur, can_buy):
 
-                elif bought != -1:
-                    mem[(cur, bought)] = max(prices[cur] - prices[bought], func(cur+1,bought))
+            if cur == n:
+                return 0
 
-                else:
-                    mem[(cur, bought)] = max(func(cur+1,cur), func(cur+1,bought))
+            if (cur, can_buy) in mem:
+                return mem[(cur, can_buy)]
 
-            return mem[(cur, bought)]
+            if can_buy:
 
-        return func(0,-1)
+                buy = func(cur+1, False) - prices[cur]
+                dont_buy = func(cur+1, True)
+
+                res = max(buy,dont_buy)
+
+            else:
+
+                sell = prices[cur]
+                dont_sell = func(cur+1,False)
+
+                res = max(sell, dont_sell)
+            mem[(cur,can_buy)] = res
+            return mem[(cur,can_buy)]           
+
+        return func(0,True)
+
 
 
 
