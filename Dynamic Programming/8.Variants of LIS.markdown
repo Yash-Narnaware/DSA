@@ -205,8 +205,8 @@ answer[j] % answer[i] == 0
 If there are multiple solutions, return any of them.
 
 **Step-by-Step Solution**:
-Same code as LIS just when we are checking if jth element is smaller than ith element replace it with checking the condition given in question. By doing this we are saying that if given condition safisfies for i and j then it will satisfy for all the elements which contributed to calculate dp[j] which is only true if elements which contributed to calculate dp[j] are in ascending order.
-e.g. - [2,4,8] and 16. 16 satisfies the given condition and we dont have to check it will all the elements of array just check it will the last element and since it is in ascending order condition will be true for all the remaining elements.
+Same code as LIS just when we are checking if jth element is smaller than ith element replace it with checking the condition given in question. By doing this we are saying that if given condition safisfies for i and j then it will satisfy for all the elements which contributed to calculate dp[j] which is only true if elements which contributed to calculate dp[j] are in ascending order.<br>
+e.g. - [2,4,8] and 16. 16 satisfies the given condition and we dont have to check it will all the elements of array just check it will the last element and since it is in ascending order condition will be true for all the remaining elements.<br>
 e.g. - [2,8,4] and 12. now condition is true for last element of array and 12 but it is not true for 8 and 12. so thats why we need array in ascending order.
 
 1. Sort the array
