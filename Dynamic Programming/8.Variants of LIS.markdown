@@ -193,3 +193,53 @@ class Solution:
         return lis
 
 ```
+
+## 7. Largest Divisible Subset
+
+**Problem Link**: [Leetcode - Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/description/)
+
+**Description**: Given a set of distinct positive integers nums, return the largest subset answer such that every pair (answer[i], answer[j]) of elements in this subset satisfies:
+
+answer[i] % answer[j] == 0, or
+answer[j] % answer[i] == 0
+If there are multiple solutions, return any of them.
+
+**Step-by-Step Solution**:
+Same code as LIS just when we are checking if jth element is smaller than ith element replace it with checking the condition given in question. By doing this we are saying that if given condition safisfies for i and j then it will satisfy for all the elements which contributed to calculate dp[j] which is only true if elements which contributed to calculate dp[j] are in ascending order.
+e.g. - [2,4,8] and 16. 16 satisfies the given condition and we dont have to check it will all the elements of array just check it will the last element and since it is in ascending order condition will be true for all the remaining elements.
+e.g. - [2,8,4] and 12. now condition is true for last element of array and 12 but it is not true for 8 and 12. so thats why we need array in ascending order.
+
+1. Sort the array
+2. Write similar code as printing LIS just change the condition to check answer[i] % answer[j] == 0, or answer[j] % answer[i] == 0 this.
+
+**Python Code**:
+```python
+class Solution:
+    def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        dp = [1]*n
+        nums.sort()
+        
+        temp = [i for i in range(n)]
+    
+        max1 = 0
+        for i in range(1,n):
+            for j in range(i):
+                if nums[j] % nums[i] == 0 or nums[i] % nums[j] == 0:
+                    if dp[j] + 1 > dp[i]:
+                        dp[i] = dp[j] + 1
+                        temp[i] = j
+                        
+            if dp[i] > dp[max1]:
+                max1 = i
+                        
+        idx = dp[max1] - 1
+        lis = [0]*dp[max1]
+        while idx >= 0:
+            lis[idx] = nums[max1]
+            max1 = temp[max1]
+            idx -= 1
+    
+        return lis
+        
+```
