@@ -73,5 +73,26 @@ class Solution:
             
         return func(0,len(arr)-1)
                 
-        
+
+#Another way of tabulation - 
+#1. initialize table with base cases
+#2. reverse the order of variables
+#3. Copy recurrence relation
+
+nums = arr[:]
+n = len(nums)
+dp = [[0]*n for _ in range(n)]
+
+for i in range(n-2,-1,-1):
+    for j in range(1,n):
+        if j == i+1:
+            dp[i][j] = 0
+        else:
+            res = float('inf')
+            for k in range(i+1,j):
+                res = min(res, dp[i][k] + dp[k][j] + nums[i]*nums[k]*nums[j])
+
+            dp[i][j] = res
+                    
+return dp[0][n-1]
         
