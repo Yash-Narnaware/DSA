@@ -1,7 +1,7 @@
 #Leetcode - https://leetcode.com/problems/burst-balloons/description/
 
 #Think reverse what would be the case when only 1 balloon left then what would be scenario when last 2 balloon are left.
-
+#Think backwards. wmake partitions backwards - that way sub problems will be independent. backwards means choosing last balloon to pop then choosing 2nd last balloon to pop and so on.in these cases cost of popping that balloon will always be cost of that balloon * 2 balloons just outside the current interaval.
 
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
