@@ -29,3 +29,21 @@ class Solution:
                 break
                     
         return arr
+
+
+#Recursive way
+class Solution:
+    #Function to sort the array using bubble sort algorithm.
+    def bubbleSort(self,arr):
+        
+        def func(arr, n):
+    
+            if n <= 0:
+                return
+            for i in range(n):
+                if arr[i] > arr[i+1]:
+                    arr[i], arr[i+1] = arr[i+1], arr[i]
+                    
+            func(arr, n-1)
+            
+        func(arr, len(arr)-1)
