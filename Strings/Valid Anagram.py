@@ -21,4 +21,25 @@ class Solution:
 
         return True
 
+
+#Using dictionaries - also works on unicode chars
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+
+        map_s = Counter(s)
+        map_t = Counter(t)
+
+        for key, val in map_s.items():
+            if key not in map_t:
+                return False
+            if map_t[key] != val:
+                return False
+            del map_t[key]
+        
+        if not map_t:
+            return True
+        return False
+
+        
+
         
