@@ -41,4 +41,27 @@ class Solution(object):
             else:
                 end = mid
         return nums[start]
+
+
+#beter approach - check if left of mid array is sorted or not if sorted then store its min and move to right subarray and vice versa
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+
+        n = len(nums)
+        l = 0
+        r = n - 1
+
+        res = float('inf')
+        while l <= r:
+
+            mid = (l + r) // 2
+
+            if nums[l] <= nums[mid]:
+                res = min(res, nums[l])
+                l = mid + 1
+            else:
+                res = min(res, nums[mid])
+                r = mid - 1
+
+        return res
         
