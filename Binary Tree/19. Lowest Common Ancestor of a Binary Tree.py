@@ -1,6 +1,6 @@
 #Leetcode - https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
 
-#if p or q found return that node and for any node if we are not returning null from both pats then return that node as LCA.
+#if p or q found return that node and for any node if we are not returning null from both parts then return that node as LCA.
 
 # Definition for a binary tree node.
 # class TreeNode:
