@@ -3,6 +3,8 @@
 #calculate next smaller element indices and previous smaller element indices and calculate the subarrays with ith element as minimum and add them up. 
 #For ith element the number of subarrays in which theat ith element is minimum is number of elements between pse * number of elements between nse((i - pse[i])*(nse[i] - i))
 
+#Consider edge cases when duplicate elements appear - only consider them in pse or nse and not both. other =wise we are considering some subarrays again and again.
+
 from collections import deque
 class Solution:
     def sumSubarrayMins(self, arr: List[int]) -> int:
@@ -14,6 +16,7 @@ class Solution:
         #Calculating the next smaller element index
         stack = deque([])
         for i in range(n-1, -1, -1):
+            #To handle edge case(equal elements) we pur <=
             while stack and arr[i] <= stack[-1][0]:
                 stack.pop()
 
