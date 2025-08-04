@@ -1,4 +1,4 @@
-#Leetcode - https://www.geeksforgeeks.org/problems/replace-elements-by-its-rank-in-the-array/1
+#GFG - https://www.geeksforgeeks.org/problems/replace-elements-by-its-rank-in-the-array/1
 
 #Store the index of each element in dict. element --> indices(elements can be repeated) then create min hep from all the unique elements and callculate the ranks using min heap and count variable.
 
