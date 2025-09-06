@@ -84,5 +84,9 @@ class Solution:
         return dp[m][n]
 
 
+#Another way to look at it - 
+#edit_distance(a,b) = len(a) + len(b) − 2×LCS(a,b)
+
+
         
 
